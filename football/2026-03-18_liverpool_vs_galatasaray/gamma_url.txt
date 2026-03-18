@@ -1,0 +1,5 @@
+Gamma URL: https://gamma.app/docs/av8xa3uvbi2rxfm
+ThemeId: blue-steel
+Format: social
+Dimensions: 9x16
+Export: gamma_export.pdf
