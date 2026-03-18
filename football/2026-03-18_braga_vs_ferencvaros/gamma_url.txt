@@ -1,0 +1,4 @@
+gammaUrl=https://gamma.app/docs/1q556nrh0zbmnsf
+themeId=blue-steel
+layout=social
+dimensions=9:16
