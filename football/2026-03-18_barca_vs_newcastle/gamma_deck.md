@@ -1,85 +1,86 @@
-# Barcelona vs Newcastle — UCL Round of 16 (2nd leg)
-**Pre-match briefing (TianShi/DiLi/RenHe)**
+# 巴塞罗那 vs 纽卡斯尔联｜欧冠1/8决赛次回合
+**赛前简报（天时/地利/人和）｜社媒卡片 16:9**
 
 ---
-# 1) Snapshot
-- First leg: **1–1** (Barnes 86' | Yamal pen 96')
-- Match question: **Can Barça turn control into clean chances, before Newcastle's transition punch lands?**
-- Rule note: UCL knockout **does not use away-goals**.
+# 1）一句话结论
+- **巴萨小优势**（信心：中等）
+- 首选比分：**2-1**；备选：**1-1（加时风险）**
 
 ---
-# 2) 天时 (Timing & Form)
-## Barcelona
-- Recent attacking momentum: strong home output (e.g., 5–2 vs Sevilla)
-- UCL defensive trend: **rare clean sheets** → “one mistake = one goal” risk
-
-## Newcastle
-- Away resilience improving (e.g., 1–0 at Chelsea)
-- Ceiling risk: key midfield/CB absences reduce build-up & resistance under pressure
+# 2）快照（Snapshot）
+- 首回合：**1-1**（巴恩斯 86'｜亚马尔 点球 96'）
+- 本场核心问题：
+  - 巴萨能否把控球变成“干净的高质量机会”？
+  - 纽卡能否用少数反击把比赛“打碎”？
+- 规则提示：欧冠淘汰赛**不使用客场进球规则**。
 
 ---
-# 3) 地利 (Home/Away + Matchups)
-## Expected game shape
-- Barça: 60%+ possession, territorial pressure, sustained waves
-- Newcastle: compact block + **fast breaks** into space behind fullbacks
+# 3）天时：状态与势头
+## 巴萨
+- 主场进攻势头在线（代表样本：近期主场 5-2 胜塞维利亚）
+- 欧冠防线零封能力不足 → “一次失误=一次丢球”的结构性风险
 
-## Where the battle is won
-- Barça wide overloads → cutbacks to zone-14 / penalty spot
-- Newcastle transitions → left channel runs & early low crosses
-
----
-# 4) 人和 (Personnel & Tactics)
-## Barcelona availability (key notes)
-- Out: Kounde, De Jong, Balde, Christensen
-- Impact: recovery speed & midfield control may dip → transition defense is the stress test
-
-## Newcastle availability (key notes)
-- Out: Bruno Guimaraes, Fabian Schar, Lewis Miley, Emil Krafth
-- Tonali: monitor fitness/illness status
-- Impact: less central progression; set pieces & direct play become more important
+## 纽卡
+- 客场韧性提升（代表样本：客场 1-0 胜切尔西）
+- 关键中轴伤停较多 → 抗压/出球上限受影响
 
 ---
-# 5) Goal Hypotheses — Barcelona
-| Path | Who | Zone | Method |
+# 4）地利：比赛形态与对位区域
+## 预期比赛形态
+- 巴萨：60%+控球，半场围攻，持续二次进攻
+- 纽卡：紧凑防守 + 快速反击，力争 2-3 脚就形成威胁
+
+## 关键区域
+- 巴萨：两翼叠加 → 倒三角到**禁区弧顶/点球点**（zone-14）
+- 纽卡：打巴萨边后卫身后空间，尤其**左路通道**
+
+---
+# 5）人和：伤停与战术影响（要点）
+## 巴萨
+- 缺阵：孔德、德容、巴尔德、克里斯滕森
+- 影响：回追速度与中场控制下降 → 转换防守是压力测试
+
+## 纽卡
+- 缺阵：吉马良斯、沙尔、麦利、克拉夫特；托纳利状态待定
+- 影响：中路推进能力下降 → 更依赖直接打法与定位球
+
+---
+# 6）进球路径假设：巴萨（更可复制）
+| 路径 | 可能球员 | 主要区域 | 方式 |
 |---|---|---|---|
-| A | **Yamal → Lewandowski** | Right half-space → 6-yard box | Through-ball / cutback |
-| B | **Raphinha + Pedri** | Left wing → zone-14 | Cutback + late run |
-| C | Set piece / pen | Lewandowski / aerial targets | Box | Corner second ball / penalty |
+| A | **亚马尔 → 莱万** | 右肋 → 小禁区前沿 | 直塞/内切后横传/倒三角 |
+| B | **拉菲尼亚 + 佩德里后插** | 左翼 → zone-14 | 强侧吸引→倒三角→后插打门 |
+| C | 点球/定位球 | 禁区 | 角球二点球/点球 |
 
 ---
-# 6) Goal Hypotheses — Newcastle
-| Path | Who | Zone | Method |
+# 7）进球路径假设：纽卡（更依赖“少量高价值机会”）
+| 路径 | 可能球员 | 主要区域 | 方式 |
 |---|---|---|---|
-| A | **Gordon / Barnes** | Left channel behind RB | Transition + low cross |
-| B | Set piece chaos | CBs + runners | Near post / 2nd ball | Corner/FK scramble |
+| A | **戈登/巴恩斯** | 左路通道（身后） | 反击提速→低平球横传→包抄 |
+| B | 定位球混战 | 多点冲击 | 近门柱/二点 | 角球/任意球二点球 |
 
 ---
-# 7) 3 Game Scripts
-## Script A (base case)
-Barça pressure → 1st goal via cutback → Newcastle chase → late tense finish
-
-## Script B (upset path)
-Newcastle scores first in transition → Barça forced into high-risk attacking → chaos game
-
-## Script C (wildcard)
-Early pen/red card changes structure → variance spikes
+# 8）三种比赛剧本（可审计）
+- **剧本A（基准）**：巴萨围攻先开张 → 纽卡追分 → 末段高压拉锯
+- **剧本B（爆冷）**：纽卡反击先得手 → 巴萨被迫提速 → 互捅局
+- **剧本C（混沌）**：早球/点球/红牌 → 方差显著增大
 
 ---
-# 8) Prediction
-- Lean: **Barcelona edge (medium confidence)**
-- Score picks: **2–1 Barça** (backup: **1–1 → extra time risk**)
-- Swing factors:
-  1) Barça build-up errors under pressure
-  2) Newcastle's first-pass quality in transitions (Bruno out)
-  3) Set pieces & penalties
+# 9）预测与关注点
+- 倾向：**巴萨小胜晋级**（中等信心）
+- 比分：**2-1**（首选）｜**1-1（加时风险）**
+- 摇摆因素Top3：
+  1) 巴萨后场出球失误次数
+  2) 纽卡反击第一传质量（吉马良斯缺阵影响）
+  3) 定位球/点球这种“细节球”
 
 ---
-# 9) What to watch (simple map)
+# 10）一张图看懂（简化版）
 ```mermaid
 flowchart LR
-A[Barça wide overloads] --> B[Cutback to zone-14]
-B --> C[Lewandowski / late runners finish]
-D[Newcastle compact block] --> E[Transition steal]
-E --> F[Gordon/Barnes left channel]
-F --> G[Low cross + tap-in]
+A[巴萨两翼叠加] --> B[倒三角到zone-14]
+B --> C[莱万/后插终结]
+D[纽卡紧凑防守] --> E[抢断转反击]
+E --> F[左路通道：戈登/巴恩斯]
+F --> G[低平球横传+包抄]
 ```
