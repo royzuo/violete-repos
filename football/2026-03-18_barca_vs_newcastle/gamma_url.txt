@@ -1,0 +1,3 @@
+Gamma URL: https://gamma.app/docs/bd0cykss8v8el2k
+ThemeId: blue-steel
+Export: gamma_export.pdf
