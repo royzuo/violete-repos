@@ -1,3 +1,0 @@
-gammaUrl=https://gamma.app/docs/b5lps73vmu4481t
-exportUrl=https://assets.api.gamma.app/export/pdf/b5lps73vmu4481t/64267144aab17e32d6acd87d336e254c/b5lps73vmu4481t.pdf
-savedPdf=/home/openclaw/.openclaw/workspace/violete-repos/football/2026-03-18_tottenham_vs_atletico/gamma_export.pdf
