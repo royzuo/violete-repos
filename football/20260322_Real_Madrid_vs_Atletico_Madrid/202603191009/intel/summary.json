@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "match": "Real Madrid vs Atletico Madrid",
+    "date": "2026-03-22",
+    "collection_timestamp": "2026-03-19T02:09:59Z"
+  },
+  "report": {
+    "球队整体": [
+        {"content": "两队赛程密集，皇马欧冠消耗巨大；马竞士气高昂，备战针对性极强。"},
+        {"content": "战术预计为皇马四中场控制 vs 马竞高位压迫反击。"},
+        {"content": "市场盘口显示比赛倾向大比分，皇马库尔图瓦伤情波动影响赔率走势。"}
+    ],
+    "教练": [
+        {"content": "阿韦洛亚（皇马）：核心任务是体能分配与伤员评估。"},
+        {"content": "西蒙尼（马竞）：专注于团队备战，拒绝场外转会流言干扰。"}
+    ],
+    "球员": [
+        {"content": "库尔图瓦 (Real Madrid) 腹股沟不适，状态存疑。"},
+        {"content": "罗德里戈 (Real Madrid) 赛季报销；巴里奥斯 (Atletico) 预计缺阵。"},
+        {"content": "姆巴佩 (Real Madrid) 伤缺，预计由贡萨洛-加西亚首发。"}
+    ]
+  }
+}
