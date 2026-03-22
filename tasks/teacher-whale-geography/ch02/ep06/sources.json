@@ -1,0 +1,62 @@
+{
+  "bundle_id": "ep06",
+  "topic": "逆流之湖——洞里萨湖如何让一条河在季风里倒着流",
+  "sources": [
+    {
+      "title": "Tonle Sap | Britannica",
+      "url": "https://www.britannica.com/place/Tonle-Sap",
+      "source_type": "reference",
+      "claim_supported": "季风期湄公河洪水可逆转洞里萨河流向，并使湖面从约 2700 平方千米扩张到约 10360 平方千米。",
+      "notes": "用于支撑逆流机制和湖面扩张量级。",
+      "confidence": "high"
+    },
+    {
+      "title": "MRC Procedures – Mekong River Commission",
+      "url": "https://www.mrcmekong.org/mrc-procedures/",
+      "source_type": "institution",
+      "claim_supported": "洞里萨河逆流是湄公河流域独特的洪季现象，可将多余洪水推入湖中，使湖体扩张到常态的数倍。",
+      "notes": "用于支撑逆流是官方识别的独特现象及其调蓄意义。",
+      "confidence": "high"
+    },
+    {
+      "title": "UNESCO conducts consultations at core areas of the Tonle Sap Biosphere Reserve",
+      "url": "https://www.unesco.org/en/articles/unesco-conducts-consultations-core-areas-tonle-sap-biosphere-reserve-strengthen-conservation-and",
+      "source_type": "institution",
+      "claim_supported": "洞里萨生物圈保护区与湄公河年度洪泛脉冲紧密相连，湿季扩湖和渔业生计高度耦合。",
+      "notes": "用于支撑生物多样性、社区生计和低水位风险。",
+      "confidence": "high"
+    },
+    {
+      "title": "STUDY: Cambodia’s Largest Lake, the Iconic Tonle Sap, is Losing Massive Amounts of Habitat | WCS",
+      "url": "https://newsroom.wcs.org/News-Releases/articleType/ArticleView/articleId/15075/STUDY-Cambodias-Largest-Lake-the-Iconic-Tonle-Sap-is-Losing-Massive-Amounts-of-Habitat.aspx",
+      "source_type": "institution",
+      "claim_supported": "湿季回灌与扩湖为鱼类和栖息地提供关键空间，栖息地流失与低水位正在压缩系统承载力。",
+      "notes": "用于支撑栖息地缩减与生态风险。",
+      "confidence": "medium-high"
+    },
+    {
+      "title": "Cambodia’s Tonle Sap Lake is running dry, taking forests and fish with it | National Geographic",
+      "url": "https://www.nationalgeographic.com/science/article/cambodia-tonle-sap-lake-running-dry-taking-flooded-forest-fish",
+      "source_type": "news_feature",
+      "claim_supported": "低水位、洪泛森林退化与鱼类资源下滑之间存在显著关联。",
+      "notes": "用于支撑生态与渔业压力，科普报道性质。",
+      "confidence": "medium"
+    },
+    {
+      "title": "MRC Says Trend in Tonle Sap’s Reverse Flow ‘Still Alarming’",
+      "url": "https://www.information.gov.kh/articles/127960",
+      "source_type": "news",
+      "claim_supported": "到 2024 年，逆流趋势减弱仍被官方视为值得警惕的流域问题。",
+      "notes": "用于支撑近期趋势和预警。",
+      "confidence": "medium"
+    },
+    {
+      "title": "Cambodia's giant lake shrinks as climate change, Mekong dams cut fish supply",
+      "url": "https://illuminem.com/illuminemvoices/cambodias-giant-lake-shrinks-as-climate-change-mekong-dams-cut-fish-supply",
+      "source_type": "news",
+      "claim_supported": "气候变化和流域工程被普遍认为是洞里萨鱼类资源与水文节律承压的重要背景。",
+      "notes": "用于支撑近年压力背景，不单独承担基础机制事实。",
+      "confidence": "medium"
+    }
+  ]
+}
