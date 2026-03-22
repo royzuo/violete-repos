@@ -1,0 +1,62 @@
+{
+  "bundle_id": "ep04",
+  "topic": "沙漠中的呼吸——奥卡万戈三角洲为何不入海却能在旱地盛开",
+  "sources": [
+    {
+      "title": "Okavango Delta - UNESCO World Heritage Centre",
+      "url": "https://whc.unesco.org/en/list/1432/",
+      "source_type": "institution",
+      "claim_supported": "奥卡万戈是大型低坡度内陆三角洲，永久沼泽与季节性洪泛区共同构成世界级湿地系统。",
+      "notes": "用于支撑内陆三角洲定义、面积量级、世界遗产地位与湿地规模。",
+      "confidence": "high"
+    },
+    {
+      "title": "Not Your Usual Flooding in Botswana - NASA Earth Observatory",
+      "url": "https://science.nasa.gov/earth/earth-observatory/not-your-usual-flooding-in-botswana-78166/",
+      "source_type": "institution",
+      "claim_supported": "奥卡万戈洪水主要来自安哥拉高地降雨，沿极缓坡度和曲折河道传播，通常数月后才抵达三角洲下部。",
+      "notes": "用于支撑洪峰迟到、安哥拉高地供水、异常高水年说明。",
+      "confidence": "high"
+    },
+    {
+      "title": "Okavango Delta | U.S. Geological Survey",
+      "url": "https://www.usgs.gov/media/images/landsat-8-mosaic-okavango-delta",
+      "source_type": "institution",
+      "claim_supported": "奥卡万戈是少见的不流入海洋的内陆三角洲，年际与季节性涨落显著，大量水通过蒸发和蒸腾耗散。",
+      "notes": "用于支撑不入海、遥感视角下的湿地涨落和蒸散主导。",
+      "confidence": "high"
+    },
+    {
+      "title": "Okavango River Basin - National Geographic Education",
+      "url": "https://education.nationalgeographic.org/resource/okavango-river-basin/",
+      "source_type": "education",
+      "claim_supported": "奥卡万戈的水源起于安哥拉高地，沿安哥拉—纳米比亚边界泥炭地和河道进入博茨瓦纳，扇形展开为内陆三角洲。",
+      "notes": "用于支撑跨境空间链条与上游湿地水塔概念。",
+      "confidence": "medium-high"
+    },
+    {
+      "title": "Okavango Wilderness Project - National Geographic Society",
+      "url": "https://www.nationalgeographic.org/society/our-programs/okavango/",
+      "source_type": "institution",
+      "claim_supported": "奥卡万戈是南部非洲干旱腹地中的关键湿地系统，依赖安哥拉高地的季节性来水维持生态与生物多样性。",
+      "notes": "用于支撑生态走廊、水塔—湿地系统与保护意义。",
+      "confidence": "medium-high"
+    },
+    {
+      "title": "New study pushes for protection of one of Africa’s ‘least understood treasures’ - Mongabay",
+      "url": "https://news.mongabay.com/2023/11/new-study-pushes-for-protection-of-one-of-africas-least-understood-treasures/",
+      "source_type": "news",
+      "claim_supported": "上游开发和保护不足会威胁奥卡万戈源区与整个流域系统，保护不能只看下游湿地本体。",
+      "notes": "用于支撑现状与风险，新闻性质，作为制度与保护议题补充，不单独支撑基础机制。",
+      "confidence": "medium"
+    },
+    {
+      "title": "Botswana shows how smarter cattle herding can save lions, reopen ancient wildlife pathways - Mongabay",
+      "url": "https://news.mongabay.com/2026/02/botswana-shows-how-smarter-cattle-herding-can-save-lions-reopen-ancient-wildlife-pathways/",
+      "source_type": "news",
+      "claim_supported": "奥卡万戈相关景观的生态价值不只在湿地本体，也在更大尺度的动物走廊连通性。",
+      "notes": "用于支撑动物走廊与边界设施对迁徙的影响。",
+      "confidence": "medium"
+    }
+  ]
+}
