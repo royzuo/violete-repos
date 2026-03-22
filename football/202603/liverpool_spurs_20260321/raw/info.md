@@ -1,1 +1,0 @@
-Liverpool vs Spurs fixture
