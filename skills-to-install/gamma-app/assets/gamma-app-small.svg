@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>Gamma App</title>
+  <rect width="64" height="64" rx="14" fill="#111827"/>
+  <path d="M14 47 28 17h8l14 30h-8l-3.2-7H25.2L22 47h-8Zm14.2-13h7.6L32 26.1 28.2 34Z" fill="#F97316"/>
+</svg>

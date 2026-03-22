@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="title desc">
+  <title>ByteDance Seedance 2 Fast</title>
+  <desc>Seedance video generation skill logo with frame and play marker</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="28" fill="url(#bg)"/>
+  <rect x="54" y="44" width="110" height="92" rx="14" fill="#F97316"/>
+  <path d="M197 56 264 90 197 124Z" fill="#FDBA74"/>
+  <rect x="76" y="64" width="66" height="8" rx="4" fill="#FED7AA"/>
+  <rect x="76" y="82" width="48" height="8" rx="4" fill="#FFEDD5"/>
+</svg>

@@ -1,0 +1,5 @@
+{
+  "bundle_id": "{{BUNDLE_ID}}",
+  "topic": "{{BUNDLE_TITLE}}",
+  "sources": []
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Teacher Whale Geography"
+  short_description: "Build evidence-backed geography chapter bundles"
+  default_prompt: "Use $teacher-whale-geography to build or audit a geography chapter or section bundle with research notes, briefing card, article, talk script, video prompts, and Gamma exports."
+policy:
+  allow_implicit_invocation: true

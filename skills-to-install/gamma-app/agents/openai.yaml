@@ -1,0 +1,9 @@
+interface:
+  display_name: "Gamma App"
+  short_description: "Generate Gamma decks, social cards, and exports"
+  icon_small: "./assets/gamma-app-small.svg"
+  icon_large: "./assets/gamma-app.svg"
+  brand_color: "#F97316"
+  default_prompt: "Use $gamma-app to turn my notes or outline into a Gamma deck and return the Gamma URL."
+policy:
+  allow_implicit_invocation: true

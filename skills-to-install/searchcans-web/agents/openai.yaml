@@ -1,0 +1,9 @@
+interface:
+  display_name: "SearchCans Web"
+  short_description: "Search links and extract URL markdown with SearchCans"
+  icon_small: "./assets/searchcans-web-small.svg"
+  icon_large: "./assets/searchcans-web.svg"
+  brand_color: "#0EA5E9"
+  default_prompt: "Use $searchcans-web to find relevant URLs or extract markdown from a page with SearchCans."
+policy:
+  allow_implicit_invocation: true

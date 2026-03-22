@@ -1,0 +1,9 @@
+interface:
+  display_name: "ByteDance Seedance 2 Fast"
+  short_description: "Generate short Seedance video clips and prompts"
+  icon_small: "./assets/bytedance-seedance-2-fast-small.svg"
+  icon_large: "./assets/bytedance-seedance-2-fast.svg"
+  brand_color: "#F97316"
+  default_prompt: "Use $bytedance-seedance-2-fast to turn my topic into a cinematic prompt and generate a short Seedance video."
+policy:
+  allow_implicit_invocation: true

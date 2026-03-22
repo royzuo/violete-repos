@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="title desc">
+  <title>SearchCans Web</title>
+  <desc>SearchCans web skill logo with search lens and result lines</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="28" fill="url(#bg)"/>
+  <circle cx="92" cy="82" r="32" fill="none" stroke="#0EA5E9" stroke-width="14"/>
+  <path d="M115 105 148 138" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <rect x="182" y="56" width="84" height="14" rx="7" fill="#E2E8F0"/>
+  <rect x="182" y="83" width="60" height="14" rx="7" fill="#94A3B8"/>
+  <rect x="182" y="110" width="74" height="14" rx="7" fill="#64748B"/>
+</svg>

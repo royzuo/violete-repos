@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" role="img" aria-labelledby="title desc">
+  <title>Web Hybrid Search</title>
+  <desc>Hybrid search skill logo with overlapping search lenses</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#082F49"/>
+      <stop offset="100%" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" rx="28" fill="url(#bg)"/>
+  <circle cx="96" cy="96" r="28" fill="none" stroke="#22D3EE" stroke-width="14"/>
+  <circle cx="160" cy="72" r="24" fill="none" stroke="#F59E0B" stroke-width="14"/>
+  <path d="M116 116 132 100" stroke="#E0F2FE" stroke-width="12" stroke-linecap="round"/>
+  <path d="M177 89 208 120" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+</svg>
