@@ -1,0 +1,62 @@
+{
+  "bundle_id": "ep05",
+  "topic": "天空之镜——乌尤尼盐沼为什么能在最干旱的高原上变成一片海",
+  "sources": [
+    {
+      "title": "Uyuni Salt Flat | Britannica",
+      "url": "https://www.britannica.com/place/Uyuni-Salt-Flat",
+      "source_type": "reference",
+      "claim_supported": "乌尤尼盐沼位于玻利维亚阿尔蒂普拉诺高原，海拔约 3656 米，面积约 10582 平方千米，是世界级大型盐沼。",
+      "notes": "用于支撑空间位置、海拔和规模。",
+      "confidence": "high"
+    },
+    {
+      "title": "A Salt Bath in Bolivia - NASA Earth Observatory",
+      "url": "https://science.nasa.gov/earth/earth-observatory/a-salt-bath-in-bolivia-149502/",
+      "source_type": "institution",
+      "claim_supported": "雨季时积水可覆盖盐沼部分区域，形成广阔的镜面效应；降水偏多年份镜面更大且持续更久。",
+      "notes": "用于支撑雨季镜面、年际差异和降水异常。",
+      "confidence": "high"
+    },
+    {
+      "title": "USGS Open-File Report on Salar de Uyuni resources",
+      "url": "https://pubs.usgs.gov/of/1995/0618/report.pdf",
+      "source_type": "government",
+      "claim_supported": "乌尤尼是古湖退缩后形成的湿性盐沼/盐壳平原，卤水中含锂、钾、镁、硼等资源。",
+      "notes": "用于支撑古湖遗迹、盐壳与卤水资源。原始 PDF 读取较差，但搜索结果和报告摘要可相互印证。",
+      "confidence": "high"
+    },
+    {
+      "title": "Hydraulic Investigations of the Salar de Uyuni, Bolivia",
+      "url": "https://www.researchgate.net/publication/281061345_Hydraulic_Investigations_of_the_Salar_de_Uyuni_Bolivia",
+      "source_type": "paper",
+      "claim_supported": "乌尤尼的水文与盐壳下卤水、古湖历史和蒸发驱动过程密切相关。",
+      "notes": "用于支撑水文—盐壳—卤水系统的联系。",
+      "confidence": "medium-high"
+    },
+    {
+      "title": "Effects of the Chemical Compositions of Salars de Uyuni and Atacama Brines on Lithium Concentration during Evaporation",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/rge.12030",
+      "source_type": "paper",
+      "claim_supported": "锂卤水的蒸发浓缩过程受卤水化学组成显著影响，乌尤尼的资源开发并不是简单的“晒盐升级版”。",
+      "notes": "用于支撑锂开发的化学与工艺复杂性。",
+      "confidence": "medium-high"
+    },
+    {
+      "title": "Bolivia's new president rekindles cautious hope for long-stalled lithium dreams | Reuters",
+      "url": "https://www.reuters.com/world/china/bolivias-new-president-rekindles-cautious-hope-long-stalled-lithium-dreams-2025-10-21/",
+      "source_type": "news",
+      "claim_supported": "乌尤尼盐沼相关锂开发项目在 2025 年仍是玻利维亚产业战略焦点，资源开发正在继续推进。",
+      "notes": "用于支撑近期开发动态，新闻来源，作为现状补充。",
+      "confidence": "medium"
+    },
+    {
+      "title": "Bolivian communities push back against foreign-backed lithium projects | Mongabay",
+      "url": "https://news.mongabay.com/2025/04/bolivian-communities-push-back-against-foreign-backed-lithium-projects/",
+      "source_type": "news",
+      "claim_supported": "锂项目推进伴随社区、生态与水资源层面的反对和争议。",
+      "notes": "用于支撑开发争议与人地冲突，不单独承担基础机制事实。",
+      "confidence": "medium"
+    }
+  ]
+}
