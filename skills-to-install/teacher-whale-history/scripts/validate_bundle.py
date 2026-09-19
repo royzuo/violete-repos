@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Validate a Teacher Whale geography bundle."""
+"""Validate a Teacher Whale chapter bundle."""
 
 from __future__ import annotations
 
 import argparse
 import json
-import math
-import os
 import re
 import sys
 from pathlib import Path
@@ -19,23 +17,17 @@ HARD_CARD_MAX = 10
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Validate a Teacher Whale geography bundle.")
-    parser.add_argument("--bundle-id", help="Bundle identifier used with --output-root / TEACHER_WHALE_OUTPUT_ROOT")
+    parser = argparse.ArgumentParser(description="Validate a Teacher Whale history bundle.")
+    parser.add_argument("--bundle-id", help="Bundle directory name under scripts/")
     parser.add_argument("--bundle-dir", help="Absolute or relative path to the bundle directory")
-    parser.add_argument("--output-root", help="Repo root used when resolving --bundle-id under scripts/")
+    parser.add_argument("--output-root", help="Optional repo root override")
     parser.add_argument("--require-exports", action="store_true", help="Require Gamma PDF and JPG exports")
     parser.add_argument("--strict-support", action="store_true", help="Treat missing support artifacts as errors")
     return parser.parse_args()
 
 
-def default_output_root() -> Path:
-    env_output_root = os.environ.get("TEACHER_WHALE_OUTPUT_ROOT")
-    if env_output_root:
-        return Path(env_output_root).resolve()
-    raise RuntimeError(
-        "Bundle location is ambiguous. Pass --bundle-dir, or pass --output-root / set "
-        "TEACHER_WHALE_OUTPUT_ROOT when using --bundle-id."
-    )
+def repo_root_from_script() -> Path:
+    return Path(__file__).resolve().parents[3]
 
 
 def resolve_bundle_dir(args: argparse.Namespace) -> Path:
@@ -43,7 +35,7 @@ def resolve_bundle_dir(args: argparse.Namespace) -> Path:
         return Path(args.bundle_dir).resolve()
     if not args.bundle_id:
         raise RuntimeError("Either --bundle-id or --bundle-dir must be provided")
-    repo_root = Path(args.output_root).resolve() if args.output_root else default_output_root()
+    repo_root = Path(args.output_root).resolve() if args.output_root else repo_root_from_script()
     return (repo_root / "scripts" / args.bundle_id).resolve()
 
 
@@ -65,99 +57,37 @@ def extract_heading_blocks(text: str, pattern: str) -> list[tuple[str, str]]:
     return blocks
 
 
-def normalized_heading(text: str) -> str:
-    stripped = text.strip()
-    stripped = re.sub(r"^#+\s*", "", stripped)
-    stripped = re.sub(r"^(卡片|Video)\s*\d+\s*[｜|:：-]\s*", "", stripped, flags=re.IGNORECASE)
-    stripped = re.sub(r"[^\w\u4e00-\u9fff]+", "", stripped, flags=re.UNICODE)
-    return stripped.lower()
-
-
-def chapter_brief_card_titles(text: str) -> list[str]:
-    matches = list(
-        re.finditer(
-            r"^###\s+卡片规划\s+\d+\s*$.*?^- 核心标题：\s*(.+?)\s*$",
-            text,
-            flags=re.MULTILINE | re.DOTALL,
-        )
-    )
-    return [match.group(1).strip() for match in matches if match.group(1).strip()]
-
-
-def chapter_brief_expected_card_count(text: str) -> int | None:
-    match = re.search(r"^- 预计内容卡数量：\s*(\d+)\s*$", text, flags=re.MULTILINE)
-    if not match:
-        return None
-    return int(match.group(1))
-
-
-def headings_match(left: str, right: str) -> bool:
-    normalized_left = normalized_heading(left)
-    normalized_right = normalized_heading(right)
-    if not normalized_left or not normalized_right:
-        return False
-    if normalized_left == normalized_right:
-        return True
-    if normalized_left in normalized_right or normalized_right in normalized_left:
-        return True
-    left_chars = set(normalized_left)
-    right_chars = set(normalized_right)
-    overlap = len(left_chars & right_chars) / max(len(left_chars | right_chars), 1)
-    return overlap >= 0.6
-
-
-def headings_align(reference: list[str], candidate: list[str]) -> bool:
-    if len(reference) != len(candidate):
-        return False
-    return all(headings_match(left, right) for left, right in zip(reference, candidate))
-
-
-def validate_chapter_brief(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], strict: bool) -> str | None:
+def validate_chapter_brief(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], strict: bool) -> None:
     if not path.exists():
         add_issue(errors if strict else warnings, "Missing chapter-brief.md")
-        return None
+        return
 
     text = load_text(path)
     headings = [
-        "## 输入章节 / 选题",
-        "## 节目框架映射",
+        "## 输入章节",
         "## 核心问题",
         "## 核心结论",
         "## 证据链",
-        "## 现状、挑战与未解之谜",
+        "## 争议与边界",
         "## 卡片规划",
         "## 输出计划",
     ]
     missing = [heading for heading in headings if heading not in text]
     checks["chapter_brief_headings_present"] = len(headings) - len(missing)
-    planned_titles = chapter_brief_card_titles(text)
-    checks["chapter_brief_planned_card_count"] = len(planned_titles)
-    expected_card_count = chapter_brief_expected_card_count(text)
-    checks["chapter_brief_declared_card_count"] = expected_card_count
     if missing:
         add_issue(errors if strict else warnings, f"chapter-brief.md missing headings: {', '.join(missing)}")
-    if expected_card_count is not None and planned_titles and expected_card_count != len(planned_titles):
-        add_issue(
-            warnings,
-            f"chapter-brief.md declares {expected_card_count} content cards but contains {len(planned_titles)} '卡片规划' blocks",
-        )
-    evidence_entries = len(re.findall(r"(?m)^\d+\.\s+证据 / 数据 / 论文 / 报告：", text))
-    checks["chapter_brief_evidence_entry_count"] = evidence_entries
-    if evidence_entries < 4:
-        add_issue(warnings, "chapter-brief.md has fewer than 4 evidence entries and may be under-supported")
-    return text
 
 
-def validate_sources(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], strict: bool) -> dict[str, Any] | None:
+def validate_sources(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], strict: bool) -> None:
     if not path.exists():
         add_issue(errors if strict else warnings, "Missing sources.json")
-        return None
+        return
 
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as exc:
         add_issue(errors, f"sources.json is not valid JSON: {exc}")
-        return None
+        return
 
     if isinstance(payload, dict):
         sources = payload.get("sources")
@@ -165,16 +95,14 @@ def validate_sources(path: Path, errors: list[str], warnings: list[str], checks:
         sources = None
     if not isinstance(sources, list):
         add_issue(errors if strict else warnings, "sources.json should contain a top-level 'sources' list")
-        return None
+        return
 
     checks["source_count"] = len(sources)
     if not sources:
         add_issue(errors if strict else warnings, "sources.json contains no sources yet")
-        return payload
+        return
 
     required_fields = ("title", "url", "claim_supported")
-    preferred_fields = ("source_type", "notes", "confidence")
-    preferred_present = {field: 0 for field in preferred_fields}
     for index, item in enumerate(sources, start=1):
         if not isinstance(item, dict):
             add_issue(errors if strict else warnings, f"sources.json source #{index} is not an object")
@@ -182,20 +110,9 @@ def validate_sources(path: Path, errors: list[str], warnings: list[str], checks:
         missing = [field for field in required_fields if not item.get(field)]
         if missing:
             add_issue(errors if strict else warnings, f"sources.json source #{index} missing fields: {', '.join(missing)}")
-        for field in preferred_fields:
-            if item.get(field):
-                preferred_present[field] += 1
-    for field, count in preferred_present.items():
-        checks[f"sources_{field}_count"] = count
-        if len(sources) > 0 and count < math.ceil(len(sources) / 2):
-            add_issue(
-                warnings,
-                f"sources.json should usually populate '{field}' for at least half the sources; found {count} of {len(sources)}",
-            )
-    return payload
 
 
-def validate_briefing_card(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any]) -> list[str] | None:
+def validate_briefing_card(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any]) -> int | None:
     if not path.exists():
         add_issue(errors, "Missing briefing-card.md")
         return None
@@ -215,50 +132,53 @@ def validate_briefing_card(path: Path, errors: list[str], warnings: list[str], c
     elif len(card_headings) > HARD_CARD_MAX:
         add_issue(errors, f"briefing-card.md should contain no more than {HARD_CARD_MAX} content cards, found {len(card_headings)}")
     elif not (RECOMMENDED_CARD_MIN <= len(card_headings) <= RECOMMENDED_CARD_MAX):
-        add_issue(warnings, f"briefing-card.md has {len(card_headings)} content cards; most geography bundles work best with {RECOMMENDED_CARD_MIN} to {RECOMMENDED_CARD_MAX}")
+        add_issue(warnings, f"briefing-card.md has {len(card_headings)} content cards; most chapters work best with {RECOMMENDED_CARD_MIN} to {RECOMMENDED_CARD_MAX}")
     if separators < len(card_headings):
         add_issue(errors, "briefing-card.md should contain at least one standalone '---' separator per content card so Gamma can split the cards correctly")
     if bullet_count < max(12, len(card_headings) * 3):
         add_issue(warnings, f"briefing-card.md looks sparse: found {bullet_count} bullets across {len(card_headings)} cards")
     if "副标题：" not in text:
         add_issue(warnings, "briefing-card.md is missing the subtitle line")
+    if re.search(r"(?m)^# 卡片[^\n]+$\n(?!- )", text):
+        add_issue(warnings, "one or more briefing cards do not begin with bullet lines")
+    if bullets_per_card and bullets_per_card[0] < 3:
+        add_issue(warnings, "the first briefing card should usually land with at least 3 bullets")
+    if bullets_per_card and bullets_per_card[-1] < 3:
+        add_issue(warnings, "the final briefing card looks thin for a conclusion card")
     if any(count < 3 for count in bullets_per_card):
         add_issue(warnings, "one or more briefing cards contain fewer than 3 bullets")
     if any(count > 5 for count in bullets_per_card):
         add_issue(warnings, "one or more briefing cards contain more than 5 bullets and may be overloaded")
-    return card_headings
+    return len(card_headings)
 
 
-def validate_talkshow(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], expected_headings: list[str] | None) -> list[str] | None:
+def validate_talkshow(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], expected_sections: int | None) -> int | None:
     if not path.exists():
         add_issue(errors, "Missing talkshow-script.md")
         return None
 
     text = load_text(path)
-    section_headings = re.findall(r"^## 卡片[^\n]+$", text, flags=re.MULTILINE)
-    section_count = len(section_headings)
+    section_count = len(re.findall(r"^## 卡片[^\n]+$", text, flags=re.MULTILINE))
     char_count = len(text.strip())
     checks["talkshow_card_count"] = section_count
     checks["talkshow_char_count"] = char_count
-    if expected_headings is not None and section_count != len(expected_headings):
-        add_issue(errors, f"talkshow-script.md should align with briefing-card.md card count ({len(expected_headings)}), found {section_count}")
+    if expected_sections is not None and section_count != expected_sections:
+        add_issue(errors, f"talkshow-script.md should align with briefing-card.md card count ({expected_sections}), found {section_count}")
     elif section_count < HARD_CARD_MIN:
         add_issue(errors, f"talkshow-script.md should contain at least {HARD_CARD_MIN} card sections, found {section_count}")
-    if expected_headings is not None and section_count == len(expected_headings) and not headings_align(expected_headings, section_headings):
-        add_issue(warnings, "talkshow-script.md card headings do not closely match briefing-card.md card headings")
     if "大家好，我是鲸鱼老师！" not in text:
         add_issue(errors, "talkshow-script.md must include the opening line '大家好，我是鲸鱼老师！'")
-    minimum_chars = max(1000, 180 * max(section_count, len(expected_headings or []), 1))
+    minimum_chars = max(1200, 220 * max(section_count, expected_sections or 0, 1))
     if char_count < minimum_chars:
-        add_issue(warnings, "talkshow-script.md looks unusually short for a full geography episode script")
+        add_issue(warnings, "talkshow-script.md looks unusually short for a full episode script")
     if "评论区" not in text and "下期" not in text and "咱们下期见" not in text:
         add_issue(warnings, "talkshow-script.md is missing a clear closing CTA or next-episode bridge")
     if "【" in text:
         add_issue(warnings, "talkshow-script.md still contains placeholder brackets")
-    return section_headings
+    return section_count
 
 
-def validate_article(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], expected_headings: list[str] | None) -> list[str] | None:
+def validate_article(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], expected_sections: int | None) -> int | None:
     if not path.exists():
         add_issue(errors, "Missing video-article.md")
         return None
@@ -284,24 +204,22 @@ def validate_article(path: Path, errors: list[str], warnings: list[str], checks:
     checks["video_article_has_formula"] = has_formula
     if not text.startswith("# "):
         add_issue(errors, "video-article.md should start with an H1 title")
-    if expected_headings is not None and content_h2_count != len(expected_headings):
-        add_issue(errors, f"video-article.md should align with briefing-card.md card count ({len(expected_headings)}), found {content_h2_count} content sections")
+    if expected_sections is not None and content_h2_count != expected_sections:
+        add_issue(errors, f"video-article.md should align with briefing-card.md card count ({expected_sections}), found {content_h2_count} content sections")
     elif content_h2_count < HARD_CARD_MIN:
         add_issue(warnings, f"video-article.md contains only {content_h2_count} content H2 sections")
-    if expected_headings is not None and content_h2_count == len(expected_headings) and not headings_align(expected_headings, content_h2_headings):
-        add_issue(warnings, "video-article.md H2 headings do not closely match briefing-card.md card headings")
     if "大家好，我是鲸鱼老师！" not in text:
         add_issue(warnings, "video-article.md is missing the standard Teacher Whale greeting")
-    minimum_chars = max(1800, 260 * max(content_h2_count, len(expected_headings or []), 1))
+    minimum_chars = max(1800, 280 * max(h2_count, expected_sections or 0, 1))
     if char_count < minimum_chars:
         add_issue(warnings, "video-article.md looks unusually short for a standalone reading text")
-    if "来源" not in text and "版权" not in text:
+    if "版权" not in text and "来源" not in text:
         add_issue(warnings, "video-article.md is missing a closing source or copyright note")
     if "【" in text:
         add_issue(warnings, "video-article.md still contains placeholder brackets")
     if sum([has_table, has_mermaid, has_image, has_code, has_formula]) < 2:
         add_issue(warnings, "video-article.md should usually include richer knowledge structures such as tables, mermaid diagrams, images, code blocks, or formulas")
-    return content_h2_headings
+    return h2_count
 
 
 def validate_video_prompts(path: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], expected_sections: int | None) -> int | None:
@@ -329,7 +247,6 @@ def validate_video_prompts(path: Path, errors: list[str], warnings: list[str], c
         "lateral",
         "zoom",
         "crane shot",
-        "aerial",
     )
     action_terms = (
         "reveals",
@@ -348,9 +265,6 @@ def validate_video_prompts(path: Path, errors: list[str], warnings: list[str], c
         "closing",
         "pulling back",
         "pushing in",
-        "flowing",
-        "eroding",
-        "sweeping",
     )
     checks["video_prompt_section_count"] = prompt_sections
     checks["video_prompt_body_count"] = prompt_bodies
@@ -379,52 +293,6 @@ def validate_video_prompts(path: Path, errors: list[str], warnings: list[str], c
     if any(not any(term in prompt.lower() for term in action_terms) for prompt in prompt_matches):
         add_issue(warnings, "one or more video prompt bodies feel too static and may not match a Seedance-style shot prompt")
     return prompt_sections
-
-
-def validate_cross_alignment(
-    chapter_brief_text: str | None,
-    sources_payload: dict[str, Any] | None,
-    briefing_headings: list[str] | None,
-    talkshow_headings: list[str] | None,
-    article_headings: list[str] | None,
-    errors: list[str],
-    warnings: list[str],
-    checks: dict[str, Any],
-) -> None:
-    if chapter_brief_text and briefing_headings:
-        planned_titles = chapter_brief_card_titles(chapter_brief_text)
-        if planned_titles:
-            checks["chapter_brief_titles_match_briefing_card"] = headings_align(planned_titles, briefing_headings)
-            if len(planned_titles) != len(briefing_headings):
-                add_issue(
-                    warnings,
-                    f"chapter-brief.md plans {len(planned_titles)} card titles but briefing-card.md contains {len(briefing_headings)} cards",
-                )
-            elif not headings_align(planned_titles, briefing_headings):
-                add_issue(warnings, "chapter-brief.md planned card titles do not closely match briefing-card.md")
-
-        declared_count = chapter_brief_expected_card_count(chapter_brief_text)
-        if declared_count is not None and declared_count != len(briefing_headings):
-            add_issue(
-                warnings,
-                f"chapter-brief.md declares {declared_count} content cards but briefing-card.md contains {len(briefing_headings)} cards",
-            )
-
-    if briefing_headings and talkshow_headings:
-        checks["talkshow_titles_match_briefing_card"] = headings_align(briefing_headings, talkshow_headings)
-    if briefing_headings and article_headings:
-        checks["article_titles_match_briefing_card"] = headings_align(briefing_headings, article_headings)
-
-    if sources_payload and briefing_headings:
-        sources = sources_payload.get("sources")
-        if isinstance(sources, list):
-            recommended_min = max(4, len(briefing_headings))
-            checks["recommended_min_source_count"] = recommended_min
-            if len(sources) < recommended_min:
-                add_issue(
-                    warnings,
-                    f"sources.json has {len(sources)} sources; a bundle with {len(briefing_headings)} cards usually needs at least {recommended_min} well-curated sources",
-                )
 
 
 def validate_exports(bundle_dir: Path, errors: list[str], warnings: list[str], checks: dict[str, Any], require_exports: bool) -> None:
@@ -456,28 +324,12 @@ def main() -> int:
     if not bundle_dir.exists():
         raise RuntimeError(f"Bundle directory not found: {bundle_dir}")
 
-    chapter_brief_text = validate_chapter_brief(bundle_dir / "chapter-brief.md", errors, warnings, checks, args.strict_support)
-    sources_payload = validate_sources(bundle_dir / "sources.json", errors, warnings, checks, args.strict_support)
-    briefing_headings = validate_briefing_card(bundle_dir / "briefing-card.md", errors, warnings, checks)
-    talkshow_headings = validate_talkshow(bundle_dir / "talkshow-script.md", errors, warnings, checks, briefing_headings)
-    article_headings = validate_article(bundle_dir / "video-article.md", errors, warnings, checks, briefing_headings)
-    validate_video_prompts(
-        bundle_dir / "video-prompts.md",
-        errors,
-        warnings,
-        checks,
-        len(briefing_headings) if briefing_headings is not None else None,
-    )
-    validate_cross_alignment(
-        chapter_brief_text,
-        sources_payload,
-        briefing_headings,
-        talkshow_headings,
-        article_headings,
-        errors,
-        warnings,
-        checks,
-    )
+    validate_chapter_brief(bundle_dir / "chapter-brief.md", errors, warnings, checks, args.strict_support)
+    validate_sources(bundle_dir / "sources.json", errors, warnings, checks, args.strict_support)
+    content_card_count = validate_briefing_card(bundle_dir / "briefing-card.md", errors, warnings, checks)
+    validate_talkshow(bundle_dir / "talkshow-script.md", errors, warnings, checks, content_card_count)
+    validate_article(bundle_dir / "video-article.md", errors, warnings, checks, content_card_count)
+    validate_video_prompts(bundle_dir / "video-prompts.md", errors, warnings, checks, content_card_count)
     validate_exports(bundle_dir, errors, warnings, checks, args.require_exports)
 
     payload = {

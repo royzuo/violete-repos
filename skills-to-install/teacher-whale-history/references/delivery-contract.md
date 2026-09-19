@@ -1,11 +1,11 @@
-# Teacher Whale Geography Delivery Contract
+# Teacher Whale Delivery Contract
 
-Use this contract for every geography chapter, section, or wonder bundle in 《鲸鱼老师讲地理》.
+Use this contract for every chapter, section, or summary bundle in 《鲸鱼老师讲历史.中国史特辑》.
 
 ## Preferred folder layout
 
 ```text
-<bundle-dir>/
+scripts/<bundle-id>/
   chapter-brief.md
   sources.json
   briefing-card.md
@@ -27,19 +27,21 @@ Use this contract for every geography chapter, section, or wonder bundle in 《�
 ## Briefing-card rules
 
 - Keep one optional cover block at the top.
-- Decide the content-card count from the section's material density and narrative needs. In most cases, 5 to 8 content cards is the right range.
+- Decide the content-card count from the chapter's evidence density and narrative needs. In most cases, 5 to 8 content cards is the right range.
 - Use explicit `---` separators between cards.
-- Each content card should map to one content step in the geography narrative.
+- Each content card should map to one evidence step, mechanism, or conclusion step.
 - Each content card should usually contain 3 to 5 concise bullets, not prose paragraphs.
 - The first card should define the real question and evidence chain.
 - The final card should compress the conclusion into a memorable synthesis.
+- Outside the title block, do not place free text outside card blocks.
 
 ## Talkshow-script rules
 
 - Open with `大家好，我是鲸鱼老师！`
-- Keep one `## 卡片 ...` section per content card.
+- Keep one `## 卡片 ...` section per content card
 - Use spoken language, but do not add claims that are absent from the research brief.
-- Keep the script concise enough for short-form delivery, but do not force an exact runtime mention inside the text.
+- Each card should read like spoken narration, not bullet notes.
+- The final card should end with a clear CTA, comment prompt, or next-episode bridge.
 - End with a closing line or CTA that matches the bundle topic.
 
 ## Video-article rules
@@ -48,25 +50,27 @@ Use this contract for every geography chapter, section, or wonder bundle in 《�
 - Keep a long-form explanatory structure, not a bullet dump.
 - Make the evidence chain legible to a reader who has not seen the briefing card.
 - Keep H2 sections aligned to the card logic instead of forcing a fixed count.
+- Expand the cards with explanation, comparison, and interpretation.
 - Use tables, mermaid diagrams, sourced images, mind maps, formulas, or compact code or schema blocks when they improve knowledge delivery.
 - Let the article absorb the dense explanatory content that would overload the card deck or spoken script.
-- End with a short source note that signals the evidence basis.
+- End with a short source note or copyright-style note that signals the evidence basis.
 
 ## Video-prompts rules
 
 - Provide one prompt block per content card.
 - Each prompt block should include a prompt body and a duration.
-- Keep the prompt body in English only.
+- Write prompt bodies in English only.
 - Use English because the same visual plan should be reusable in both Chinese and English program versions.
-- Keep each clip at 15 seconds or less.
+- Keep each duration at 15 seconds or less.
 - Make each prompt directly generation-ready with subject, scene, camera, motion, and texture.
-- Make each prompt correspond to the matching card's explanation, not just the bundle topic. A viewer should be able to tell which card the shot belongs to.
+- Make each prompt correspond to the matching card's explanation, not just the episode topic. A viewer should be able to tell which card the shot belongs to.
 - Prefer the Seedance-style structure: camera + subject + action + atmosphere + lighting + concise quality tags.
-- Keep the visual language geographic, scientific, and cinematic rather than fantastical.
+- Keep the visual language historical, evidence-aware, and non-fantastical unless Roy explicitly asks otherwise.
 
 ## Quality bar
 
-- Prefer geoscience, ecology, cartography, field-observation, and source-aware wording over travel-copy hype.
-- Separate measured facts, scientific interpretation, and media-friendly simplification.
-- When a claim is controversial or unresolved, express the uncertainty clearly.
+- Prefer scientific, archaeological, and source-aware wording over sloganized history.
+- Separate excavated evidence, scholarly inference, and modern interpretation.
+- When a claim is controversial, express the uncertainty clearly.
+- A local sample bundle can be used for spot checks, but the bundle should be draftable from this contract and the output-quality reference alone.
 - Do not auto-publish by default. Publishing is a separate explicit step.

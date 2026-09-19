@@ -6,6 +6,8 @@ Use this reference before drafting `briefing-card.md`, `talkshow-script.md`, `vi
 
 Do not rely on a fixed sample bundle to complete the skill. If the repo later contains a strong geography sample bundle, you may inspect it as a secondary sense check. The primary bar is the quality contract below.
 
+Missing helper automation is never a reason to lower this bar. If search automation or export tooling is unavailable, keep the same evidence, explanation, and alignment standards and complete the markdown bundle first.
+
 ## `briefing-card.md`
 
 Target shape:

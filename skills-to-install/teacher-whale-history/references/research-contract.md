@@ -20,19 +20,16 @@ If you need a quick starting pool of links, run `scripts/harvest_sources.py` wit
 - Curate the useful items into `sources.json`.
 - Discard weak media rewrites, duplicate URLs, and low-authority pages.
 - The harvesting helper uses `web-hybrid-search`; inspect the recorded `runs` in `source-candidates.json` when a query underperforms.
-- If the harvesting helper or its provider keys are unavailable, gather sources manually with direct browsing/search tools instead of lowering the research bar.
-- Prefer query sets that cover wonder uniqueness, location, formation, geographic significance, current threats, sustainability, recent news, and unresolved mysteries.
 
 ## `chapter-brief.md` minimum sections
 
 Keep these headings:
 
-- `## 输入章节 / 选题`
-- `## 节目框架映射`
+- `## 输入章节`
 - `## 核心问题`
 - `## 核心结论`
 - `## 证据链`
-- `## 现状、挑战与未解之谜`
+- `## 争议与边界`
 - `## 卡片规划`
 - `## 输出计划`
 
@@ -40,15 +37,15 @@ Keep these headings:
 
 ```json
 {
-  "bundle_id": "nile-delta",
-  "topic": "尼罗河三角洲：水的史诗如何塑造文明",
+  "bundle_id": "ep06",
+  "topic": "第06讲｜大汉气象——丝路起点与西域往事",
   "sources": [
     {
-      "title": "尼罗河三角洲地貌演化研究",
+      "title": "悬泉置遗址相关研究",
       "url": "https://example.com",
       "source_type": "paper",
-      "claim_supported": "三角洲的沉积演化决定了农业与聚落格局",
-      "notes": "用于支撑形成过程和地理意义部分",
+      "claim_supported": "悬泉置承担驿传与接待功能",
+      "notes": "用于支撑第二卡和正文第二部分",
       "confidence": "high"
     }
   ]
@@ -57,15 +54,14 @@ Keep these headings:
 
 ## Source selection rules
 
-- Prefer geoscience institution, scientific paper, observatory, government survey, museum, UNESCO, national park, or high-quality institutional source.
-- Use mainstream media and popular science articles as secondary orientation, not as the sole factual support.
+- Prefer museum, excavation report, academic publication, major reference work, or high-quality institutional source.
+- Use popular articles only as secondary orientation, not as the sole factual support.
 - Keep one source item per distinct evidence use when possible.
 - Record caution notes when a source is interpretive, dated, or disputed.
-- If the wonder has important news within the last three days, include at least one news entry in the ledger.
 
 ## Evidence handling rules
 
 - Every major claim in the final bundle should be supported by at least one source entry.
 - If a claim is uncertain, keep that uncertainty visible in `chapter-brief.md`.
-- Avoid turning unresolved formation debates, climate attributions, or human-impact claims into absolute statements.
-- Before drafting the final outputs, map the evidence chain into a card plan inside `chapter-brief.md`. Most geography bundles will need 5 to 8 content cards, but the count should come from the material rather than from a fixed template.
+- Avoid turning contested identity, ethnicity, or civilizational claims into absolute statements.
+- Before drafting the final outputs, map the evidence chain into a card plan inside `chapter-brief.md`. Most chapters will need 5 to 8 content cards, but the count should come from the material rather than from a fixed template.

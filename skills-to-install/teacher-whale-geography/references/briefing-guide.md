@@ -4,9 +4,9 @@ Use this guide when resolving a geography section or wonder topic and structurin
 
 ## Scope resolution
 
-Prefer a section that already exists in the program outline or briefing file. If Roy has not pinned a section yet, use the current in-repo briefing source `prompts/geography_briefing.txt` to infer the topic direction.
+Prefer a section that already exists in the program outline or briefing file. If Roy has not pinned a section yet, infer the topic direction from the active season outline or existing bundle directories in the working tree instead of inventing a disconnected topic.
 
-For the current geography direction, `水的史诗` is the active theme signal in the repo prompt, but do not hardcode it as the only future theme.
+For the current geography direction, `水的史诗` is the active theme signal in the season outline, but do not hardcode it as the only future theme.
 
 Selection rules:
 

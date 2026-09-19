@@ -1,22 +1,20 @@
 #!/usr/bin/env python3
-"""Scaffold a Teacher Whale geography bundle with the expected working files."""
+"""Scaffold a Teacher Whale history bundle with the expected working files."""
 
 from __future__ import annotations
 
 import argparse
-import os
 import sys
 from pathlib import Path
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Initialize a Teacher Whale geography bundle.")
-    parser.add_argument("--bundle-id", help="Bundle identifier used in templates and output-root mode")
-    parser.add_argument("--bundle-dir", help="Explicit bundle directory to create or refresh")
+    parser = argparse.ArgumentParser(description="Initialize a Teacher Whale history bundle.")
+    parser.add_argument("--bundle-id", required=True, help="Bundle directory name under scripts/")
     parser.add_argument("--title", required=True, help="Bundle title shown inside generated templates")
     parser.add_argument(
         "--series-title",
-        default="《鲸鱼老师讲地理》",
+        default="《鲸鱼老师讲历史.中国史特辑》",
         help="Series title used in templates",
     )
     parser.add_argument(
@@ -27,30 +25,13 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def resolve_bundle_dir(args: argparse.Namespace) -> Path:
-    if args.bundle_dir:
-        return Path(args.bundle_dir).resolve()
-
-    if not args.bundle_id:
-        raise RuntimeError("Provide --bundle-dir or --bundle-id.")
-
-    if args.output_root:
-        return (Path(args.output_root).resolve() / "scripts" / args.bundle_id).resolve()
-
-    env_output_root = os.environ.get("TEACHER_WHALE_OUTPUT_ROOT")
-    if env_output_root:
-        return (Path(env_output_root).resolve() / "scripts" / args.bundle_id).resolve()
-
-    raise RuntimeError(
-        "Bundle location is ambiguous. Pass --bundle-dir, or pass --output-root / set "
-        "TEACHER_WHALE_OUTPUT_ROOT when using --bundle-id."
-    )
+def repo_root_from_script() -> Path:
+    return Path(__file__).resolve().parents[3]
 
 
 def render_template(template_text: str, args: argparse.Namespace) -> str:
-    bundle_id = args.bundle_id or Path(args.bundle_dir).resolve().name
     return (
-        template_text.replace("{{BUNDLE_ID}}", bundle_id)
+        template_text.replace("{{BUNDLE_ID}}", args.bundle_id)
         .replace("{{BUNDLE_TITLE}}", args.title)
         .replace("{{SERIES_TITLE}}", args.series_title)
     )
@@ -65,9 +46,10 @@ def write_file(path: Path, content: str, force: bool) -> str:
 
 def main() -> int:
     args = parse_args()
+    repo_root = Path(args.output_root).resolve() if args.output_root else repo_root_from_script()
     skill_root = Path(__file__).resolve().parents[1]
     template_root = skill_root / "assets" / "templates"
-    bundle_dir = resolve_bundle_dir(args)
+    bundle_dir = repo_root / "scripts" / args.bundle_id
     bundle_dir.mkdir(parents=True, exist_ok=True)
 
     template_map = {

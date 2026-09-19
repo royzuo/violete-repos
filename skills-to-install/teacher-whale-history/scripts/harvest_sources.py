@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Harvest candidate source links for a Teacher Whale geography bundle."""
+"""Harvest candidate source links for a Teacher Whale history bundle."""
 
 from __future__ import annotations
 
 import argparse
 import importlib.util
 import json
-import os
 import re
 import sys
 import urllib.parse
@@ -16,26 +15,16 @@ from typing import Any
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Harvest candidate source links with web-hybrid-search.")
-    parser.add_argument("--bundle-id", help="Bundle identifier used with --output-root / TEACHER_WHALE_OUTPUT_ROOT")
+    parser.add_argument("--bundle-id", help="Bundle directory name under scripts/")
     parser.add_argument("--bundle-dir", help="Absolute or relative path to the bundle directory")
-    parser.add_argument("--output-root", help="Repo root used when resolving --bundle-id under scripts/")
+    parser.add_argument("--output-root", help="Optional repo root override")
     parser.add_argument("--query", action="append", required=True, help="Search query; pass multiple times for multiple queries")
     parser.add_argument("--limit", type=int, default=5, help="Max results per query")
     return parser.parse_args()
 
 
-def skill_root_from_script() -> Path:
-    return Path(__file__).resolve().parents[1]
-
-
-def default_output_root() -> Path:
-    env_output_root = os.environ.get("TEACHER_WHALE_OUTPUT_ROOT")
-    if env_output_root:
-        return Path(env_output_root).resolve()
-    raise RuntimeError(
-        "Bundle location is ambiguous. Pass --bundle-dir, or pass --output-root / set "
-        "TEACHER_WHALE_OUTPUT_ROOT when using --bundle-id."
-    )
+def repo_root_from_script() -> Path:
+    return Path(__file__).resolve().parents[3]
 
 
 def resolve_bundle_dir(args: argparse.Namespace) -> Path:
@@ -43,7 +32,7 @@ def resolve_bundle_dir(args: argparse.Namespace) -> Path:
         return Path(args.bundle_dir).resolve()
     if not args.bundle_id:
         raise RuntimeError("Either --bundle-id or --bundle-dir must be provided")
-    repo_root = Path(args.output_root).resolve() if args.output_root else default_output_root()
+    repo_root = Path(args.output_root).resolve() if args.output_root else repo_root_from_script()
     return (repo_root / "scripts" / args.bundle_id).resolve()
 
 
@@ -55,22 +44,7 @@ def hybrid_module() -> Any:
     if _HYBRID_MODULE is not None:
         return _HYBRID_MODULE
 
-    skill_root = skill_root_from_script()
-    candidate_paths = [
-        skill_root.parent / "web-hybrid-search" / "scripts" / "hybrid_search.py",
-    ]
-    codex_home = os.environ.get("CODEX_HOME")
-    if codex_home:
-        candidate_paths.append(
-            Path(codex_home).expanduser() / "skills" / "web-hybrid-search" / "scripts" / "hybrid_search.py"
-        )
-    module_path = next((path for path in candidate_paths if path.exists()), None)
-    if module_path is None:
-        looked = ", ".join(str(path) for path in candidate_paths)
-        raise RuntimeError(
-            "Unable to locate web-hybrid-search. Install that skill alongside this one, "
-            f"or gather sources manually with direct browsing/search tools. Checked: {looked}"
-        )
+    module_path = repo_root_from_script() / "skills" / "web-hybrid-search" / "scripts" / "hybrid_search.py"
     spec = importlib.util.spec_from_file_location("teacher_whale_web_hybrid_search", module_path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f"Unable to load web-hybrid-search module from: {module_path}")

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Teacher Whale History"
+  short_description: "Build evidence-backed chapter briefing bundles"
+  default_prompt: "Use $teacher-whale-history to build or audit a chapter bundle with research notes, briefing card, article, talk script, video prompts, and Gamma exports."
+policy:
+  allow_implicit_invocation: true

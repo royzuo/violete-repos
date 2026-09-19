@@ -1,52 +1,91 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -lt 1 ]]; then
-  echo "Usage: $0 <bundle-id> [commit-message] [--no-push]" >&2
-  exit 1
-fi
-
 PUSH_AFTER=1
+REPO_ROOT="${REPO_ROOT:-}"
+BUNDLE_ID=""
+BUNDLE_DIR=""
 POSITIONAL=()
-for arg in "$@"; do
-  case "$arg" in
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
     --no-push)
       PUSH_AFTER=0
+      shift
+      ;;
+    --bundle-id)
+      BUNDLE_ID="${2:-}"
+      shift 2
+      ;;
+    --bundle-dir)
+      BUNDLE_DIR="${2:-}"
+      shift 2
+      ;;
+    --repo-root)
+      REPO_ROOT="${2:-}"
+      shift 2
       ;;
     *)
-      POSITIONAL+=("$arg")
+      POSITIONAL+=("$1")
+      shift
       ;;
   esac
 done
 
-set -- "${POSITIONAL[@]}"
-
-if [[ $# -lt 1 || $# -gt 2 ]]; then
-  echo "Usage: $0 <bundle-id> [commit-message] [--no-push]" >&2
+if [[ -n "$BUNDLE_ID" && -n "$BUNDLE_DIR" ]]; then
+  echo "Provide either --bundle-id or --bundle-dir, not both" >&2
   exit 1
 fi
 
-BUNDLE_ID="$1"
-CUSTOM_MESSAGE="${2:-}"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILL_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-REPO_ROOT="${REPO_ROOT:-$(cd "$SKILL_DIR/../.." && pwd)}"
-TARGET_DIR="$REPO_ROOT/scripts/$BUNDLE_ID"
+if [[ -n "$BUNDLE_DIR" ]]; then
+  TARGET_DIR="$(cd "$BUNDLE_DIR" && pwd)"
+elif [[ -n "$BUNDLE_ID" ]]; then
+  if [[ -z "$REPO_ROOT" ]]; then
+    echo "--repo-root is required when using --bundle-id" >&2
+    exit 1
+  fi
+  TARGET_DIR="$(cd "$REPO_ROOT/scripts/$BUNDLE_ID" && pwd)"
+else
+  if [[ ${#POSITIONAL[@]} -lt 1 || ${#POSITIONAL[@]} -gt 2 ]]; then
+    echo "Usage: $0 [--bundle-dir <dir> | --bundle-id <id> --repo-root <root>] [commit-message] [--no-push]" >&2
+    exit 1
+  fi
+  BUNDLE_ID="${POSITIONAL[0]}"
+  POSITIONAL=("${POSITIONAL[@]:1}")
+  if [[ -z "$REPO_ROOT" ]]; then
+    echo "--repo-root is required when using positional bundle-id" >&2
+    exit 1
+  fi
+  TARGET_DIR="$(cd "$REPO_ROOT/scripts/$BUNDLE_ID" && pwd)"
+fi
 
 if [[ ! -d "$TARGET_DIR" ]]; then
   echo "Bundle directory not found: $TARGET_DIR" >&2
   exit 1
 fi
 
-COMMIT_MESSAGE="$CUSTOM_MESSAGE"
-if [[ -z "$COMMIT_MESSAGE" ]]; then
-  COMMIT_MESSAGE="Add ${BUNDLE_ID} Teacher Whale geography bundle"
+CUSTOM_MESSAGE="${POSITIONAL[0]:-}"
+
+if [[ -z "$REPO_ROOT" ]]; then
+  REPO_ROOT="$(git -C "$TARGET_DIR" rev-parse --show-toplevel)"
 fi
 
-git -C "$REPO_ROOT" add "scripts/$BUNDLE_ID"
+RELATIVE_TARGET="$(python3 - <<'PY' "$REPO_ROOT" "$TARGET_DIR"
+from pathlib import Path
+import sys
+print(Path(sys.argv[2]).resolve().relative_to(Path(sys.argv[1]).resolve()))
+PY
+)"
 
-if git -C "$REPO_ROOT" diff --cached --quiet -- "scripts/$BUNDLE_ID"; then
-  echo "No staged changes for scripts/$BUNDLE_ID"
+COMMIT_MESSAGE="$CUSTOM_MESSAGE"
+if [[ -z "$COMMIT_MESSAGE" ]]; then
+  COMMIT_MESSAGE="Add $(basename "$TARGET_DIR") Teacher Whale geography bundle"
+fi
+
+git -C "$REPO_ROOT" add "$RELATIVE_TARGET"
+
+if git -C "$REPO_ROOT" diff --cached --quiet -- "$RELATIVE_TARGET"; then
+  echo "No staged changes for $RELATIVE_TARGET"
   exit 0
 fi
 
